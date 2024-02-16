@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.service }}-{{ .Values.version }}
+  namespace: {{ .Values.global.namespace }}
+  labels:
+    app: {{ .Values.service }}
+    version: {{ .Values.version }}
+  {{- if .Values.global.labels }}
+  {{- range $key, $val := $.Values.global.labels  }}
+    {{ $key }}: {{ $val }}
+  {{- end }}
+  {{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.service }}
+      version: {{ .Values.version }}
+  template:
+    metadata:
+      {{- with .Values.global.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app: {{ .Values.service }}
+        version: {{ .Values.version }}
+      {{- if .Values.global.labels }}
+      {{- range $key, $val := $.Values.global.labels  }}
+        {{ $key }}: {{ $val }}
+      {{- end }}
+      {{- end }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      containers:
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.imagePullPolicy }}
+        ports:
+        {{- range .Values.ports }}
+        - name: {{ .name | quote }}
+          containerPort: {{ .targetPort }}
+          protocol: TCP
+        {{- end }}
+        resources:
+        {{- toYaml .Values.resources | nindent 10 }}

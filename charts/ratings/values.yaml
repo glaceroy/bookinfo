@@ -1,0 +1,57 @@
+# Default values for details.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# The overall system your service is a part of
+system: bookinfo
+# The name of your service
+service: ratings
+# The major version number for your service
+version: v1
+
+# The number of pod replicas to run for your service
+replicaCount: 1
+
+# Docker settings
+image:
+  # The name of your docker container
+  repository: docker.io/istio/examples-bookinfo-ratings-v1
+  # Your docker container's tag
+  tag: latest
+  imagePullPolicy: IfNotPresent
+
+# Istio uses the service account name as a component of the service's security
+# identity. Set "create" to false to use an previously created service account.
+serviceAccount:
+  create: true
+  name: bookinfo-ratings
+
+# Port settings
+# Ports must be named <protocol>[-<suffix>] to work with Istio.
+# Valid protocols are grpc, http, http2, https, mongo, mysql, redis, tcp, tls, udp
+ports:
+- name: http
+  port: 9080
+  targetPort: 9080
+
+# Resource settings (use Kubernetes syntax)
+resources: 
+  limits:
+    cpu: 50m
+    memory: 100Mi
+  requests:
+    cpu: 20m
+    memory: 55Mi
+
+# Probe settings (use Kubernetes syntax)
+probes:
+  livenessProbe:
+    initialDelaySeconds: 30
+    httpGet:
+      path: /health
+      port: 9080
+  readinessProbe:
+    timeoutSeconds: 10
+    httpGet:
+      path: /health
+      port: 9080

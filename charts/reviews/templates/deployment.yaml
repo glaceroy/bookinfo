@@ -1,0 +1,59 @@
+{{- range $val := .Values.version  }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $.Values.service }}-{{ $val }}
+  namespace: {{ $.Values.global.namespace }}
+  labels:
+    app: {{ $.Values.service }}
+    version: {{ $val }}
+  {{- if $.Values.global.labels }}
+  {{- range $key, $val := $.Values.global.labels  }}
+    {{ $key }}: {{ $val }}
+  {{- end }}
+  {{- end }}
+spec:
+  replicas: {{ $.Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ $.Values.service }}
+      version: {{ $val }}
+  template:
+    metadata:
+      {{- with $.Values.global.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app: {{ $.Values.service }}
+        version: {{ $val }}
+      {{- if $.Values.global.labels }}
+      {{- range $key, $val := $.Values.global.labels  }}
+        {{ $key }}: {{ $val }}
+      {{- end }}
+      {{- end }}
+    spec:
+      serviceAccountName: {{ $.Values.serviceAccount.name }}
+      containers:
+      - name: {{ $.Chart.Name }}
+        image: {{ $.Values.image.repository }}-{{ $val }}:{{ $.Values.image.tag }}
+        imagePullPolicy: {{ $.Values.image.imagePullPolicy }}
+        env:          
+        {{- range $key, $val := $.Values.env }}
+        - name: {{ $key }}
+          value: {{ $val | quote }}
+        {{- end }}
+        ports:
+        {{- range $.Values.ports }}
+        - name: {{ .name | quote }}
+          containerPort: {{ .targetPort }}
+          protocol: TCP
+        {{- end }}
+        resources:
+        {{- toYaml $.Values.resources | nindent 10 }}
+        volumeMounts:
+        {{- toYaml $.Values.volumeMounts | default "" | nindent 8 }} 
+      volumes:
+      {{- toYaml $.Values.volumes | default "" | nindent 6 }}  
+---
+{{- end }}
