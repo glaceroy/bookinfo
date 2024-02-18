@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bookinfo-production
+  namespace: argocd
+  labels:
+    app-type: bookinfo-production
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: bookinfo-project-prod
+  source:
+    path: ./
+    repoURL: https://github.com/glaceroy/bookinfo
+    targetRevision: HEAD
+  info:
+    - name: 'Purpose'
+      value: 'Application to test istio use cases'
+  syncPolicy:
+    automated: {}

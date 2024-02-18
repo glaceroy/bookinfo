@@ -9,18 +9,11 @@ spec:
     istio: {{ .Values.gateway.selector }}
   servers:
   - port:
-      number: {{ .Values.gateway.port }}
-      name: https
-      protocol: HTTPS
+      number: {{ .Values.gateway.port.number }}
+      name: {{ .Values.gateway.port.name }}
+      protocol: {{ .Values.gateway.port.protocol }}
     hosts:
-    - {{ .Values.global.namespace}}/{{ .Values.global.hostname }}
-    tls:
-      mode: {{ .Values.gateway.tls.mode }}
-      credentialName: {{ .Values.gateway.tls.secretName }}
-      cipherSuites:
-      {{- range $.Values.gateway.tls.cipherSuites }}
-        - {{ . }}
-      {{- end }}
-      minProtocolVersion: {{ .Values.gateway.tls.min }}
-      maxProtocolVersion: {{ .Values.gateway.tls.max }}
+    - {{ .Values.global.hostname | default "*" | quote }}
+
+
 

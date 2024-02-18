@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 
 global:
-  namespace: lbg-prel-bookinfo-001-pb
-  hostname: ocpeng-bookinfo.ia.com
+  namespace: bookinfo-production
+  #hostname: ocpeng-bookinfo.ia.com
   podAnnotations:
     CMDB_ID: AL19428
     sidecar.istio.io/inject: "true"
@@ -18,17 +18,11 @@ global:
 gateway:
   name: bookinfo-gateway
   selector: ingressgateway
-  port: 443
-  tls:
-    mode: SIMPLE
-    secretName: bookinfo-tls
-    cipherSuites:
-    - "ECDHE-RSA-AES256-GCM-SHA384"
-    - "ECDHE-ECDSA-AES256-GCM-SHA384"
-    - "ECDHE-RSA-AES128-GCM-SHA256"
-    - "ECDHE-ECDSA-AES128-GCM-SHA256"
-    min: TLSV1_2
-    max: TLSV1_3
+  port:
+    number: 8080
+    name: http
+    protocol: HTTP
+  
 
 virtualService:
   name: bookinfo

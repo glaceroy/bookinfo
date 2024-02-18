@@ -6,7 +6,7 @@ metadata:
   namespace: {{ .Values.global.namespace }}
 spec:
   hosts:
-  - {{ .Values.global.hostname }}
+  - {{ .Values.global.hostname | default "*" | quote }}
   gateways:
   - {{ .Values.gateway.name }}
   http:

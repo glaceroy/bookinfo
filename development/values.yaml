@@ -1,0 +1,64 @@
+# Default values for bookinfo.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  namespace: bookinfo-development
+  #hostname: ocpeng-bookinfo.ia.com
+  podAnnotations:
+    CMDB_ID: AL19428
+    sidecar.istio.io/inject: "true"
+    sidecar.istio.io/proxyCPU: 100m
+    sidecar.istio.io/proxyCPULimit: 100m
+    sidecar.istio.io/proxyMemory: 120M
+    sidecar.istio.io/proxyMemoryLimit: 120M
+  labels:
+    CMDB_ID: AL19428    
+
+gateway:
+  name: bookinfo-gateway
+  selector: ingressgateway
+  port:
+    number: 8080
+    name: http
+    protocol: HTTP
+  
+
+virtualService:
+  name: bookinfo
+
+namespacePolicy:
+  defaultDeny: true
+  mtlsMode: STRICT
+
+authorizations:
+  bookinfo-productpage:
+    matchLabels:
+      app: productpage
+    rules:
+    - allowPrincipals:
+      - istio-system/istio-ingressgateway-service-account
+      paths:
+      - /productpage
+      - /static/*
+      - /login
+      - /logout
+      - /api/v1/products
+
+  bookinfo-details:
+    matchLabels:
+      app: details
+    rules:
+    - allowPrincipals:
+      - bookinfo-productpage
+      paths:
+      - /details/*
+
+  bookinfo-reviews:
+    matchLabels:
+      app: reviews
+    rules:
+    - allowPrincipals:
+      - bookinfo-productpage
+      paths:
+      - /reviews/*
