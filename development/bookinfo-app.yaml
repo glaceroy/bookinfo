@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: bookinfo-project-dev
   source:
-    path: ./
+    path: development/
     repoURL: https://github.com/glaceroy/bookinfo
     targetRevision: HEAD
   info:
