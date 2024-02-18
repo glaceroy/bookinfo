@@ -7,7 +7,7 @@ metadata:
     app-type: bookinfo-production
 spec:
   destination:
-    namespace: default
+    namespace: bookinfo-production
     server: https://kubernetes.default.svc
   project: bookinfo-project-prod
   source:
