@@ -10,14 +10,14 @@ version: 0.1.0
 # versions needs to be changed, whenever corresponding the sub chart versions are changing
 dependencies:
 - name: details
-  repository: file://charts/details
+  repository: file://../charts/details
   version: 0.1.0
 - name: ratings
-  repository: file://charts/ratings
+  repository: file://../charts/ratings
   version: 0.1.0
 - name: reviews
-  repository: file://charts/reviews
+  repository: file://../charts/reviews
   version: 0.1.0
 - name: productpage
-  repository: file://charts/productpage
+  repository: file://../charts/productpage
   version: 0.1.0
