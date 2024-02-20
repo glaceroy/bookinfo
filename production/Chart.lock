@@ -1,0 +1,15 @@
+dependencies:
+- name: details
+  repository: file://../charts/details
+  version: 0.1.0
+- name: ratings
+  repository: file://../charts/ratings
+  version: 0.1.0
+- name: reviews
+  repository: file://../charts/reviews
+  version: 0.1.0
+- name: productpage
+  repository: file://../charts/productpage
+  version: 0.1.0
+digest: sha256:c172dd4e2c1f9619f2de99b4e4b5799ed4897dafa6fb57405ffc8610862a4429
+generated: "2024-02-20T00:55:31.39963Z"
