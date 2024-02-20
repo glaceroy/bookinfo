@@ -17,7 +17,7 @@ spec:
     helm:
       version: v3
       valuesFile:
-        - production/values.yaml
+        - production/helm-config/values.yaml
   info:
     - name: 'Purpose'
       value: 'Application to test istio use cases'
