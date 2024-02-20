@@ -9,7 +9,6 @@ gateway:
     number: 8080
     name: http
     protocol: HTTP
-  
 
 virtualService:
   name: bookinfo-virtualservice
