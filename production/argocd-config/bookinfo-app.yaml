@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: bookinfo-project-prod
   source:
-    path: production/
+    path: production/helm-config/
     repoURL: https://github.com/glaceroy/bookinfo
     targetRevision: HEAD
     helm:
