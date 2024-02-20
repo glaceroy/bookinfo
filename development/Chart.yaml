@@ -21,3 +21,6 @@ dependencies:
 - name: productpage
   repository: file://../charts/productpage
   version: 0.1.0
+- name: istio-config
+  repository: file://../charts/istio-config
+  version: 0.1.0
