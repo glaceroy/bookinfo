@@ -14,3 +14,36 @@ global:
     sidecar.istio.io/proxyMemoryLimit: 120M
   labels:
     CMDB_ID: AL19428    
+
+details:
+  image:
+    tag: 1.18.0
+
+productpage:
+  image:
+    tag: 1.18.0
+
+ratings:
+  image:
+    tag: 1.18.0
+
+reviews:
+  image:
+    tag: 1.18.0
+
+istio-config:
+  gateway:
+    port:
+      number: 8443
+      name: https
+      protocol: https
+    tls:
+      mode: SIMPLE
+      credentialsName: bookinfo-details
+      cipherSuites:
+        - "ECDHE-RSA-AES256-GCM-SHA384"
+        - "ECDHE-ECDSA-AES256-GCM-SHA384"
+        - "ECDHE-RSA-AES128-GCM-SHA256"
+        - "ECDHE-ECDSA-AES128-GCM-SHA256"
+      minProtocolVersion: TLSV1_2
+      maxProtocolVersion: TLSV1_3
