@@ -15,6 +15,4 @@ global:
   labels:
     CMDB_ID: AL19428    
 
-details:
-  image:
-    tag: 1.18.0
+

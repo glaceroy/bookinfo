@@ -14,6 +14,12 @@ spec:
       protocol: {{ .Values.gateway.port.protocol }}
     hosts:
     - {{ .Values.global.hostname | default "*" | quote }}
+    {{- if .Values.gateway.tls }}
+    tls:
+      {{- range $tls := .Values.tls }}
+      {{ . }}
+      {{- end}}
+    {{- end}}
 
 
 
