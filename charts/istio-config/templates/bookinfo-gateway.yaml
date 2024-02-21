@@ -17,7 +17,7 @@ spec:
     {{- if .Values.gateway.tls }}
     tls:
       {{- range $tls := .Values.tls }}
-      {{ . }}
+      {{ $tls }}
       {{- end}}
     {{- end}}
 
