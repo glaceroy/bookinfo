@@ -11,3 +11,12 @@ spec:
     - destination:
         host: {{ .Values.service }}
         subset: v1
+      weight: 25
+    - destination:
+        host: {{ .Values.service }}
+        subset: v2
+      weight: 25
+    - destination:
+        host: {{ .Values.service }}
+        subset: v3
+      weight: 50
