@@ -39,7 +39,7 @@ istio-config:
       protocol: https
     tls:
       mode: SIMPLE
-      credentialsName: bookinfo-details
+      credentialsName: bookinfo-tls
       cipherSuites:
         - "ECDHE-RSA-AES256-GCM-SHA384"
         - "ECDHE-ECDSA-AES256-GCM-SHA384"
