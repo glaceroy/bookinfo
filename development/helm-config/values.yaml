@@ -16,5 +16,5 @@ global:
     CMDB_ID: AL19428    
 
 details:
-  # Your docker container's tag
-  tag: 1.18.0
+  image:
+    tag: 1.18.0
