@@ -14,3 +14,7 @@ global:
     sidecar.istio.io/proxyMemoryLimit: 120M
   labels:
     CMDB_ID: AL19428    
+
+details:
+  # Your docker container's tag
+  tag: 1.18.0
