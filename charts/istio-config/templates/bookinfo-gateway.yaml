@@ -16,9 +16,7 @@ spec:
     - {{ .Values.global.hostname | default "*" | quote }}
     {{- if .Values.gateway.tls }}
     tls:
-      {{- range $tls := .Values.tls }}
-      {{ $tls }}
-      {{- end}}
+{{ toYaml .Values.gateway.tls | indent 6 }}
     {{- end}}
 
 
