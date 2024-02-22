@@ -13,10 +13,6 @@ gateway:
 virtualService:
   name: bookinfo-virtualservice
 
-namespacePolicy:
-  defaultDeny: true
-  mtlsMode: STRICT
-
 authorizations:
   productpage:
     matchLabels:
