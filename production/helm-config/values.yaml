@@ -51,20 +51,17 @@ istio-config:
   destinationRule:
     productpage:
       trafficPolicy:
-        loadBalancer:
-          simple: LEAST_REQUEST
+        tls:
+          mode: ISTIO_MUTUAL
       subsets:
       - name: v1
         labels:
           version: v1
-        trafficPolicy:
-          loadBalancer:
-            simple: ROUND_ROBIN
 
     details:
       trafficPolicy:
-        loadBalancer:
-          simple: ROUND_ROBIN
+        tls:
+          mode: ISTIO_MUTUAL
       subsets:
       - name: v1
         labels:
@@ -75,8 +72,8 @@ istio-config:
 
     reviews:
       trafficPolicy:
-        loadBalancer:
-          simple: ROUND_ROBIN
+        tls:
+          mode: ISTIO_MUTUAL
       subsets:
       - name: v1
         labels:
@@ -90,8 +87,8 @@ istio-config:
 
     ratings:
       trafficPolicy:
-        loadBalancer:
-          simple: ROUND_ROBIN
+        tls:
+          mode: ISTIO_MUTUAL
       subsets:
       - name: v1
         labels:
@@ -105,3 +102,41 @@ istio-config:
       - name: v2-mysql-vm
         labels:
           version: v2-mysql-vm
+
+  virtualService:
+    productpage:
+      http:
+      - route:
+        - destination:
+            host: productpage
+            subset: v1
+
+    details:
+      http:
+      - route:
+        - destination:
+            host: details
+            subset: v1
+
+    reviews:
+      http:
+      - route:
+        - destination:
+            host: reviews
+            subset: v1
+          weight: 10
+        - destination:
+            host: reviews
+            subset: v2
+          weight: 45
+        - destination:
+            host: reviews
+            subset: v3
+          weight: 45
+
+    ratings:
+      http:
+      - route:
+        - destination:
+            host: ratings
+            subset: v1
