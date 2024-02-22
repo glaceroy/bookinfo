@@ -2,7 +2,7 @@
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: {{ $key | lower | quote }}
+  name: {{ $key | lower }}
   namespace: {{ $.Values.global.namespace }}
 spec:
   selector:

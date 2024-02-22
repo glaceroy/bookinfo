@@ -10,9 +10,6 @@ gateway:
     name: http
     protocol: HTTP
 
-virtualService:
-  name: bookinfo-virtualservice
-
 authorizations:
   productpage:
     matchLabels:
@@ -87,3 +84,33 @@ destinationRule:
     - name: v2-mysql-vm
       labels:
         version: v2-mysql-vm
+
+virtualService:
+  productpage:
+    http:
+    - route:
+      - destination:
+          host: productpage
+          subset: v1
+
+  details:
+    http:
+    - route:
+      - destination:
+          host: details
+          subset: v1
+
+  reviews:
+    http:
+    - route:
+      - destination:
+          host: reviews
+          subset: v1
+
+  ratings:
+    http:
+    - route:
+      - destination:
+          host: ratings
+          subset: v1
+

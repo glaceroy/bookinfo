@@ -1,11 +1,12 @@
-{{- range $key, $spec := .Values.destinationRule }}
+{{- range $key, $spec := .Values.virtualService }}
 apiVersion: networking.istio.io/v1alpha3
-kind: DestinationRule
+kind: VirtualService
 metadata:
   name: {{ $key | lower }}
   namespace: {{ $.Values.global.namespace }}
 spec:
-  host: {{ $key | lower }}
+  hosts:
+  - {{ $key | lower }}
 {{- if not ($spec | empty)  }}
 {{ toYaml $spec | indent 2 }}
 {{- end }}
