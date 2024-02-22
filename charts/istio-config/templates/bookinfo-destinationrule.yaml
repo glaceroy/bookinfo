@@ -1,0 +1,13 @@
+{{- range $key, $spec := .Values.destinationRule }}
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ $key | lower | quote }}
+  namespace: {{ .Values.global.namespace }}
+spec:
+  host: {{ $key | lower | quote }}
+{{- if not ($spec | empty)  }}
+{{ toYaml $spec | indent 2 }}
+{{- end }}
+---
+{{- end }}
