@@ -15,91 +15,35 @@ global:
   labels:
     CMDB_ID: AL19428    
 
-  destinationRule:
-    productpage:
-      trafficPolicy:
-        tls:
-          mode: ISTIO_MUTUAL
-      subsets:
-      - name: v1
-        labels:
-          version: v1
+details:
+  image:
+    tag: 1.18.0
 
-    details:
-      trafficPolicy:
-        tls:
-          mode: ISTIO_MUTUAL
-      subsets:
-      - name: v1
-        labels:
-          version: v1
-      - name: v2
-        labels:
-          version: v2
+productpage:
+  image:
+    tag: 1.18.0
 
-    reviews:
-      trafficPolicy:
-        tls:
-          mode: ISTIO_MUTUAL
-      subsets:
-      - name: v1
-        labels:
-          version: v1
-      - name: v2
-        labels:
-          version: v2
-      - name: v3
-        labels:
-          version: v3
+ratings:
+  image:
+    tag: 1.18.0
 
-    ratings:
-      trafficPolicy:
-        tls:
-          mode: ISTIO_MUTUAL
-      subsets:
-      - name: v1
-        labels:
-          version: v1
-      - name: v2
-        labels:
-          version: v2
-      - name: v2-mysql
-        labels:
-          version: v2-mysql
-      - name: v2-mysql-vm
-        labels:
-          version: v2-mysql-vm
+reviews:
+  image:
+    tag: 1.18.0
 
-  details:
-    image:
-      tag: 1.18.0
-
-  productpage:
-    image:
-      tag: 1.18.0
-
-  ratings:
-    image:
-      tag: 1.18.0
-
-  reviews:
-    image:
-      tag: 1.18.0
-
-  istio-config:
-    gateway:
-      port:
-        number: 8443
-        name: https
-        protocol: https
-      tls:
-        mode: MUTUAL
-        credentialName: bookinfo-tls
-        cipherSuites:
-          - "ECDHE-RSA-AES256-GCM-SHA384"
-          - "ECDHE-ECDSA-AES256-GCM-SHA384"
-          - "ECDHE-RSA-AES128-GCM-SHA256"
-          - "ECDHE-ECDSA-AES128-GCM-SHA256"
-        minProtocolVersion: TLSV1_2
-        maxProtocolVersion: TLSV1_3
-
+istio-config:
+  gateway:
+    port:
+      number: 8443
+      name: https
+      protocol: https
+    tls:
+      mode: MUTUTAL
+      credentialName: bookinfo-tls
+      cipherSuites:
+        - "ECDHE-RSA-AES256-GCM-SHA384"
+        - "ECDHE-ECDSA-AES256-GCM-SHA384"
+        - "ECDHE-RSA-AES128-GCM-SHA256"
+        - "ECDHE-ECDSA-AES128-GCM-SHA256"
+      minProtocolVersion: TLSV1_2
+      maxProtocolVersion: TLSV1_3
