@@ -111,3 +111,6 @@ istio-config:
         - destination:
             host: ratings
             subset: v1
+        - destination:
+            host: ratings
+            subset: v2
