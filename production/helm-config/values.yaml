@@ -38,7 +38,7 @@ istio-config:
       name: https
       protocol: https
     tls:
-      mode: MUTUTAL
+      mode: MUTUAL
       credentialName: bookinfo-tls
       cipherSuites:
         - "ECDHE-RSA-AES256-GCM-SHA384"
