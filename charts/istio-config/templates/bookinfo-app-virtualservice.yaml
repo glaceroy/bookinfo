@@ -2,7 +2,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: {{ $key | lower }}
+  name: {{ $key | lower }}-vs
   namespace: {{ $.Values.global.namespace }}
 spec:
   hosts:
