@@ -2,7 +2,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: {{ $key | lower }}
+  name: {{ $key | lower }}-dr
   namespace: {{ $.Values.global.namespace }}
 spec:
   host: {{ $key | lower }}
