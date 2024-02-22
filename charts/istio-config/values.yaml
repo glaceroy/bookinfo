@@ -47,18 +47,12 @@ authorizations:
 
 destinationRule:
   productpage:
-    trafficPolicy:
-      tls:
-        mode: ISTIO_MUTUAL
     subsets:
     - name: v1
       labels:
         version: v1
 
   details:
-    trafficPolicy:
-      tls:
-        mode: ISTIO_MUTUAL
     subsets:
     - name: v1
       labels:
@@ -68,9 +62,6 @@ destinationRule:
         version: v2
 
   reviews:
-    trafficPolicy:
-      tls:
-        mode: ISTIO_MUTUAL
     subsets:
     - name: v1
       labels:
@@ -83,9 +74,6 @@ destinationRule:
         version: v3
 
   ratings:
-    trafficPolicy:
-      tls:
-        mode: ISTIO_MUTUAL
     subsets:
     - name: v1
       labels:
@@ -99,5 +87,3 @@ destinationRule:
     - name: v2-mysql-vm
       labels:
         version: v2-mysql-vm
-
-
