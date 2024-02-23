@@ -43,17 +43,5 @@ resources:
     cpu: 20m
     memory: 55Mi
 
-# Probe settings (use Kubernetes syntax)
-probes:
-  livenessProbe:
-    initialDelaySeconds: 30
-    httpGet:
-      path: /health
-      port: 9080
-  readinessProbe:
-    timeoutSeconds: 10
-    httpGet:
-      path: /health
-      port: 9080
 
 

@@ -51,9 +51,6 @@ spec:
         {{- end }}
         resources:
         {{- toYaml $.Values.resources | nindent 10 }}
-        {{- if $.Values.probes }}
-        {{- toYaml $.Values.probes | nindent 8 }}
-        {{- end }} 
         volumeMounts:
         {{- toYaml $.Values.volumeMounts | default "" | nindent 8 }} 
       volumes:
